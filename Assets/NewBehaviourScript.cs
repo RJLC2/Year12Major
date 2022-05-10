@@ -13,7 +13,6 @@ public class NewBehaviourScript : MonoBehaviour
 {
 
     public InputField playerInput;
-
     public GameObject playerButton;
     public GameObject autoComplete;
 
@@ -23,6 +22,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     IEnumerator GetData(string player) // sends an API request - returns a JSON file
     {
+
         // create the web request and download handler
         UnityWebRequest webReq = new UnityWebRequest();
         webReq.downloadHandler = new DownloadHandlerBuffer();
@@ -33,12 +33,11 @@ public class NewBehaviourScript : MonoBehaviour
 
         string rawJson = Encoding.Default.GetString(webReq.downloadHandler.data); // convert the byte array and wait for a returning result
 
-
         jsonResult = JSON.Parse(rawJson); // parse the raw string into a json result we can easily read
 
-        JSONNode data = (JSONNode)jsonResult;
+        JSONNode data = (JSONNode)jsonResult; // transfering data to a usable format
 
-        foreach(JSONNode playerObject in data[0])
+        foreach(JSONNode playerObject in data[0]) // the ability to search the NBA player by first or last name
         {
             print(playerObject["first_name"] + " " + playerObject["last_name"]);
             GameObject newPlayer = Instantiate(playerButton);
@@ -48,14 +47,17 @@ public class NewBehaviourScript : MonoBehaviour
        
     }
 
-    public void SearchPlayer()
+    public void SearchPlayer() // searching for NBA player
     {
-        if(playerInput.text.Length > 2)
+
+        foreach (Transform child in autoComplete.transform) // loop though the players on dropdown destoy them
+        {
+            Destroy(child.gameObject);
+        }
+
+        if (playerInput.text.Length > 2) // players name will pop up after 3 + characters have been entered
         {
             StartCoroutine("GetData", playerInput.text);
         }
     }
-
-    
-
 }
