@@ -37,12 +37,18 @@ public class NewBehaviourScript : MonoBehaviour
 
         JSONNode data = (JSONNode)jsonResult; // transfering data to a usable format
 
+        int count = 0;
+
         foreach(JSONNode playerObject in data[0]) // the ability to search the NBA player by first or last name
         {
-            print(playerObject["first_name"] + " " + playerObject["last_name"]);
-            GameObject newPlayer = Instantiate(playerButton);
-            newPlayer.transform.SetParent(autoComplete.transform);
-            newPlayer.GetComponent<Button>().GetComponentInChildren<Text>().text = playerObject["first_name"] + " " + playerObject["last_name"];
+            if (count > 4) // the dropdown will only have the top 5 names
+            {
+                print(playerObject["first_name"] + " " + playerObject["last_name"]);
+                GameObject newPlayer = Instantiate(playerButton);
+                newPlayer.transform.SetParent(autoComplete.transform);
+                newPlayer.GetComponent<Button>().GetComponentInChildren<Text>().text = playerObject["first_name"] + " " + playerObject["last_name"];
+            }
+            count++;
         }
        
     }
@@ -59,5 +65,6 @@ public class NewBehaviourScript : MonoBehaviour
         {
             StartCoroutine("GetData", playerInput.text);
         }
+
     }
 }
