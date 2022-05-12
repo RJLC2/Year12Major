@@ -15,6 +15,8 @@ public class NewBehaviourScript : MonoBehaviour
     public InputField playerInput;
     public GameObject playerButton;
     public GameObject autoComplete;
+    public Text guessCount;
+    public int guessText;
 
     public string url = "https://www.balldontlie.io/api/v1/players"; // API url
 
@@ -41,12 +43,12 @@ public class NewBehaviourScript : MonoBehaviour
 
         foreach(JSONNode playerObject in data[0]) // the ability to search the NBA player by first or last name
         {
-            if (count > 4) // the dropdown will only have the top 5 names
+            if (count < 5) // the dropdown will only have the top 5 names
             {
-                print(playerObject["first_name"] + " " + playerObject["last_name"]);
                 GameObject newPlayer = Instantiate(playerButton);
                 newPlayer.transform.SetParent(autoComplete.transform);
                 newPlayer.GetComponent<Button>().GetComponentInChildren<Text>().text = playerObject["first_name"] + " " + playerObject["last_name"];
+                print(count + " - " + playerObject["first_name"] + " " + playerObject["last_name"]);
             }
             count++;
         }
@@ -67,4 +69,5 @@ public class NewBehaviourScript : MonoBehaviour
         }
 
     }
+
 }
