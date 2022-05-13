@@ -15,8 +15,7 @@ public class NewBehaviourScript : MonoBehaviour
     public InputField playerInput;
     public GameObject playerButton;
     public GameObject autoComplete;
-    public Text guessCount;
-    public int guessText;
+    public GameObject clickedPlayer;
 
     public string url = "https://www.balldontlie.io/api/v1/players"; // API url
 
@@ -66,6 +65,39 @@ public class NewBehaviourScript : MonoBehaviour
         if (playerInput.text.Length > 2) // players name will pop up after 3 + characters have been entered
         {
             StartCoroutine("GetData", playerInput.text);
+        }
+
+    }
+
+    IEnumerator Getplayerdata(string player) // sends an API request - returns a JSON file
+    {
+
+        // create the web request and download handler
+        UnityWebRequest webReq = new UnityWebRequest();
+        webReq.downloadHandler = new DownloadHandlerBuffer();
+
+        webReq.url = string.Format("{0}?search={1}", url, player); // build the url and query
+
+        yield return webReq.SendWebRequest(); // send the web request and wait for a returning result
+
+        string rawJson = Encoding.Default.GetString(webReq.downloadHandler.data); // convert the byte array and wait for a returning result
+
+        jsonResult = JSON.Parse(rawJson); // parse the raw string into a json result we can easily read
+
+        JSONNode data = (JSONNode)jsonResult; // transfering data to a usable format
+
+        int count = 0;
+
+        foreach (JSONNode playerObject in data[0]) // 
+        {
+            if (count < 1) // 
+            {
+                GameObject newPlayer = Instantiate(clickedPlayer);
+                newPlayer.transform.SetParent(autoComplete.transform);
+                newPlayer.GetComponent<Button>().GetComponentInChildren<Text>().text = playerObject["first_name"] + " " + playerObject["last_name"];
+                print(count + " - " + playerObject["first_name"] + " " + playerObject["last_name"]);
+            }
+            count++;
         }
 
     }
