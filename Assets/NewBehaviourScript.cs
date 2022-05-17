@@ -16,10 +16,13 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject playerButton;
     public GameObject autoComplete;
     public GameObject clickedPlayer;
+    public GameObject Rows;
 
     public string url = "https://www.balldontlie.io/api/v1/players"; // API url
 
     public JSONNode jsonResult; // resulting JSON from an API request
+
+    // The IEnumerator Getdata below is acsessing all the API's data for NBA player's first names and last names while loading in all their information atached to them using SimpleJSON code
 
     IEnumerator GetData(string player) // sends an API request - returns a JSON file
     {
@@ -54,6 +57,10 @@ public class NewBehaviourScript : MonoBehaviour
        
     }
 
+    // searchPlayer is the ability to search for a player that is located in the API we are using above if the player does not show up eaither the name is spelt wrong or they have retired
+    // only the top 5 names will show up in the text box so if the player you want does not show up keep tryping there name out
+    // players will begin to show up after 3 or more letters have been typed if a player with only 2 letters in there name user should try there other name (first name or last name)
+
     public void SearchPlayer() // searching for NBA player
     {
 
@@ -68,6 +75,9 @@ public class NewBehaviourScript : MonoBehaviour
         }
 
     }
+
+    // The IEnumerator Getplayerdata below is acsessing all the API NBA player's data that is atached to them
+    // E.G. First Name, Last Name, Team, Confrence, Divion, Position, Height, Weight, Age & Jersey Number 
 
     IEnumerator Getplayerdata(string player) // sends an API request - returns a JSON file
     {
@@ -88,12 +98,12 @@ public class NewBehaviourScript : MonoBehaviour
 
         int count = 0;
 
-        foreach (JSONNode playerObject in data[0]) // 
+        foreach (JSONNode playerObject in data[0]) // The ability to click a player you have searched for then all there information will be inserted into the rows
         {
-            if (count < 1) // 
+            if (count < 1) // only one player can be selected at a time
             {
                 GameObject newPlayer = Instantiate(clickedPlayer);
-                newPlayer.transform.SetParent(autoComplete.transform);
+                newPlayer.transform.SetParent(Rows.transform);
                 newPlayer.GetComponent<Button>().GetComponentInChildren<Text>().text = playerObject["first_name"] + " " + playerObject["last_name"];
                 print(count + " - " + playerObject["first_name"] + " " + playerObject["last_name"]);
             }
