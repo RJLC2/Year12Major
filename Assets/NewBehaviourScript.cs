@@ -69,17 +69,17 @@ public class NewBehaviourScript : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        if (playerInput.text.Length > 2) // players name will pop up after 3 + characters have been entered
+        if (playerInput.text.Length > 1) // players name will pop up after 2 + characters have been entered
         {
             StartCoroutine("GetData", playerInput.text);
         }
 
     }
 
-    // The IEnumerator Getplayerdata below is acsessing all the API NBA player's data that is atached to them
+    // The Getplayerdata below is acsessing the NBA player's data that has been selected
     // E.G. First Name, Last Name, Team, Confrence, Divion, Position, Height, Weight, Age & Jersey Number 
 
-    public void Getplayerdata(string player) // sends an API request - returns a JSON file
+    public void Getplayerdata(string player) // once you have selected a player the row with all theri information will show up
     {
         GameObject newPlayer = Instantiate(clickedPlayer);
         newPlayer.transform.SetParent(Rows.transform);

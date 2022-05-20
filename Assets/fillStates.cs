@@ -14,6 +14,16 @@ public class fillStates : MonoBehaviour
 
     public JSONNode jsonResult; // resulting JSON from an API request
 
+    public Text NameText;
+    public Text TeamText;
+    public Text ConfText;
+    public Text DivText;
+    public Text PosText;
+    public Text HtText;
+    public Text WtText;
+    public Text AgeText;
+    public Text JerseyText;
+
     public void fill(string playername)
     {
         print(playername);
