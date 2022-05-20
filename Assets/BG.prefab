@@ -1442,6 +1442,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   url: https://www.balldontlie.io/api/v1/players
+  NameText: {fileID: 6435762186596273678}
+  TeamText: {fileID: 6435762185350538926}
+  ConfText: {fileID: 6435762185959886475}
+  DivText: {fileID: 6435762186354722625}
+  PosText: {fileID: 6435762185583816528}
+  HtText: {fileID: 6435762185565139040}
+  WtText: {fileID: 6435762185731881644}
+  AgeText: {fileID: 6435762186457589635}
+  JerseyText: {fileID: 6435762186277740073}
 --- !u!1 &6435762187144527819
 GameObject:
   m_ObjectHideFlags: 0

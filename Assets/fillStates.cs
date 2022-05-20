@@ -11,7 +11,6 @@ using UnityEngine.UI;
 public class fillStates : MonoBehaviour
 {
     public string url = "https://www.balldontlie.io/api/v1/players"; // API url
-
     public JSONNode jsonResult; // resulting JSON from an API request
 
     public Text NameText;
@@ -27,6 +26,7 @@ public class fillStates : MonoBehaviour
     public void fill(string playername)
     {
         print(playername);
+        StartCoroutine(Getplayerdata(playername));
     }
 
     IEnumerator Getplayerdata(string player) // sends an API request - returns a JSON file
@@ -52,7 +52,15 @@ public class fillStates : MonoBehaviour
         {
             if (count < 1) // only one player can be selected at a time
             {
-
+                NameText.text = playerObject["first_name"] + " " + playerObject["last_name"];
+                JSONNode team = playerObject["team"];
+                TeamText.text = team["full_name"];
+                ConfText.text = team["conference"];
+                DivText.text = team["division"];
+                PosText.text = playerObject["position"];
+                HtText.text = playerObject["height_feet"] + "ft " + playerObject["height_inches"] + "'";
+                WtText.text = playerObject["weight_pounds"];
+                // JerseyText.text = playerObject[""];
             }
             count++;
         }
