@@ -59,7 +59,7 @@ public class fillStates : MonoBehaviour
                 DivText.text = team["division"];
                 PosText.text = playerObject["position"];
                 HtText.text = playerObject["height_feet"] + "ft " + playerObject["height_inches"] + "'";
-                WtText.text = playerObject["weight_pounds"];
+                WtText.text = playerObject["weight_pounds"] + " lb";
             }
             count++;
         }
