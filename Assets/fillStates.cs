@@ -50,16 +50,16 @@ public class fillStates : MonoBehaviour
 
         foreach (JSONNode playerObject in data[0]) // The ability to click a player you have searched for then all there information will be inserted into the rows
         {
-            if (count < 1) // only one player can be selected at a time
+            if (count < 1) // once user has selected a player the rows will show up with the below information
             {
-                NameText.text = playerObject["first_name"] + " " + playerObject["last_name"];
-                JSONNode team = playerObject["team"];
-                TeamText.text = team["full_name"];
-                ConfText.text = team["conference"];
-                DivText.text = team["division"];
-                PosText.text = playerObject["position"];
-                HtText.text = playerObject["height_feet"] + "ft " + playerObject["height_inches"] + "'";
-                WtText.text = playerObject["weight_pounds"] + " lb";
+                NameText.text = playerObject["first_name"] + " " + playerObject["last_name"]; // first and last name
+                JSONNode team = playerObject["team"]; // all information under team
+                TeamText.text = team["full_name"]; // team name
+                ConfText.text = team["conference"]; // conference
+                DivText.text = team["division"]; // teams divions
+                PosText.text = playerObject["position"]; // players position
+                HtText.text = playerObject["height_feet"] + "ft " + playerObject["height_inches"] + "'"; // players height
+                WtText.text = playerObject["weight_pounds"] + " lb"; // players weight
             }
             count++;
         }
