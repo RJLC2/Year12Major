@@ -43,7 +43,7 @@ public class NewBehaviourScript : MonoBehaviour
         AllStars.Add("Joel Embiid");
 
         int Randomplayer = UnityEngine.Random.Range(0,AllStars.Count); // randomized player from above list
-        print(AllStars[Randomplayer]);
+        AllStar(AllStars[Randomplayer]);
     }
 
     // the IEnumerator Getdata below is acsessing all the API's data for NBA player's first names and last names while loading in all their information atached to them using SimpleJSON code

@@ -10,6 +10,7 @@ using UnityEngine.UI;
 
 public class fillStates : MonoBehaviour
 {
+    public NewBehaviourScript Game;
     public string url = "https://www.balldontlie.io/api/v1/players"; // API url
     public JSONNode jsonResult; // resulting JSON from an API request
 
@@ -20,8 +21,11 @@ public class fillStates : MonoBehaviour
     public Text PosText;
     public Text HtText;
     public Text WtText;
-    public Text AgeText;
-    public Text JerseyText;
+
+    void Start() // the ability for this script to talk to NewBehavioyrScript
+    {
+        Game = GameObject.Find("InputField").GetComponent<NewBehaviourScript>(); // finding the InputField and Getting the player data from NewBehaviourScript
+    }
 
     public void fill(string playername)
     {
@@ -31,7 +35,6 @@ public class fillStates : MonoBehaviour
 
     IEnumerator Getplayerdata(string player) // sends an API request - returns a JSON file
     {
-
         // create the web request and download handler
         UnityWebRequest webReq = new UnityWebRequest();
         webReq.downloadHandler = new DownloadHandlerBuffer();
@@ -63,7 +66,16 @@ public class fillStates : MonoBehaviour
             }
             count++;
         }
+        CheckCorrect();
+    }
 
+
+    public void CheckCorrect()
+    {
+        if (TeamText.text == Game.AllStarTeam)
+        {
+            TeamText.gameObject.GetComponentInParent<Image>().color = Color.green;
+        }
     }
 
 }
