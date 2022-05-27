@@ -69,12 +69,37 @@ public class fillStates : MonoBehaviour
         CheckCorrect();
     }
 
-
     public void CheckCorrect()
     {
-        if (TeamText.text == Game.AllStarTeam)
+        if (TeamText.text == Game.AllStarTeam) // team text will go green if correct
         {
             TeamText.gameObject.GetComponentInParent<Image>().color = Color.green;
+        }
+        if (ConfText.text == Game.AllStarConf) // conference text will go green if correct
+        {
+            ConfText.gameObject.GetComponentInParent<Image>().color = Color.green;
+        }
+        if (DivText.text == Game.AllStarDiv) // divion text will go green if correct
+        {
+            DivText.gameObject.GetComponentInParent<Image>().color = Color.green;
+        }
+        if (PosText.text == Game.AllStarPos) // position text will go green if correct
+        {
+            PosText.gameObject.GetComponentInParent<Image>().color = Color.green;            
+        }
+        else
+        {
+            foreach (char c1 in PosText.text)
+            {
+                foreach (char c2 in Game.AllStarPos)
+                {
+                    if (c1 == c2)
+                    {
+                        PosText.gameObject.GetComponentInParent<Image>().color = Color.yellow;
+                        break;
+                    }
+                }
+            }
         }
     }
 
