@@ -22,7 +22,8 @@ public class NewBehaviourScript : MonoBehaviour
     public string AllStarConf;
     public string AllStarDiv;
     public string AllStarPos;
-    public int AllStarHt;
+    public int AllStarHtF;
+    public int AllStarHtI;
     public int AllStarWt;
 
     public string url = "https://www.balldontlie.io/api/v1/players"; // API url
@@ -41,6 +42,7 @@ public class NewBehaviourScript : MonoBehaviour
         AllStars.Add("Kevin Durant");
         AllStars.Add("Giannis Antetokoumpo");
         AllStars.Add("Joel Embiid");
+        AllStars.Add("Chris Paul");
 
         int Randomplayer = UnityEngine.Random.Range(0,AllStars.Count); // randomized player from above list
         AllStar(AllStars[Randomplayer]);
@@ -144,7 +146,8 @@ public class NewBehaviourScript : MonoBehaviour
                 AllStarConf = team["conference"]; // conference
                 AllStarDiv = team["division"]; // teams divions
                 AllStarPos = playerObject["position"]; // players position
-                //AllStarHt = playerObject["height_feet"] + "ft " + playerObject["height_inches"] + "'"; // players height
+                AllStarHtF = int.Parse(playerObject["height_feet"]); // players height feet
+                AllStarHtI = int.Parse(playerObject["height_inches"]); // players height inches
                 //AllStarWt = playerObject["weight_pounds"] + " lb"; // players weight
             }
             count++;

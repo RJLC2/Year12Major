@@ -19,7 +19,10 @@ public class fillStates : MonoBehaviour
     public Text ConfText;
     public Text DivText;
     public Text PosText;
-    public Text HtText;
+    public Text HtTextFTNUM;
+    public Text HtTextFT;
+    public Text HtTextIN;
+    public Text HtTextQuote;
     public Text WtText;
 
     void Start() // the ability for this script to talk to NewBehavioyrScript
@@ -61,7 +64,10 @@ public class fillStates : MonoBehaviour
                 ConfText.text = team["conference"]; // conference
                 DivText.text = team["division"]; // teams divions
                 PosText.text = playerObject["position"]; // players position
-                HtText.text = playerObject["height_feet"] + "ft " + playerObject["height_inches"] + "'"; // players height
+                HtTextFTNUM.text = playerObject["height_feet"]; // players height in feet
+                HtTextFT.text = "ft "; // players word ft
+                HtTextIN.text = playerObject["height_inches"]; // players inches
+                HtTextQuote.text = "'"; // players Quotes
                 WtText.text = playerObject["weight_pounds"] + " lb"; // players weight
             }
             count++;
