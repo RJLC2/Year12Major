@@ -65,7 +65,7 @@ public class fillStates : MonoBehaviour
                 DivText.text = team["division"]; // teams divions
                 PosText.text = playerObject["position"]; // players position
                 HtTextFTNUM.text = playerObject["height_feet"]; // players height in feet
-                HtTextFT.text = "ft "; // players word ft
+                HtTextFT.text = "ft"; // players word ft
                 HtTextIN.text = playerObject["height_inches"]; // players inches
                 HtTextQuote.text = "'"; // players Quotes
                 WtText.text = playerObject["weight_pounds"] + " lb"; // players weight
@@ -93,7 +93,7 @@ public class fillStates : MonoBehaviour
         {
             PosText.gameObject.GetComponentInParent<Image>().color = Color.green;            
         }
-        else
+        else // the position will go yellow if the randoized player plays one of the positions
         {
             foreach (char c1 in PosText.text)
             {
@@ -105,6 +105,14 @@ public class fillStates : MonoBehaviour
                         break;
                     }
                 }
+            }
+        }
+        if (int.Parse(HtTextFTNUM.text) == Game.AllStarHtF) // height text will go green if the ft and inches are correct
+        {
+            if (int.Parse(HtTextIN.text) == Game.AllStarHtI)
+            {
+                HtTextFTNUM.gameObject.GetComponentInParent<Image>().color = Color.green;
+                print("matches");
             }
         }
     }
