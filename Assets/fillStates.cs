@@ -14,7 +14,9 @@ public class fillStates : MonoBehaviour
     public string url = "https://www.balldontlie.io/api/v1/players"; // API url
     public JSONNode jsonResult; // resulting JSON from an API request
 
-    public Text NameText;
+    public Text NameTextF;
+    public Text NameTextS;
+    public Text NameTextL;
     public Text TeamText;
     public Text ConfText;
     public Text DivText;
@@ -23,6 +25,7 @@ public class fillStates : MonoBehaviour
     public Text HtTextFT;
     public Text HtTextIN;
     public Text HtTextQuote;
+    public Text WtTextNum;
     public Text WtText;
 
     void Start() // the ability for this script to talk to NewBehavioyrScript
@@ -58,7 +61,9 @@ public class fillStates : MonoBehaviour
         {
             if (count < 1) // once user has selected a player the rows will show up with the below information
             {
-                NameText.text = playerObject["first_name"] + " " + playerObject["last_name"]; // first and last name
+                NameTextF.text = playerObject["first_name"]; // first name
+                NameTextS.text = " "; // space between name
+                NameTextL.text = playerObject["last_name"]; // last name
                 JSONNode team = playerObject["team"]; // all information under team
                 TeamText.text = team["full_name"]; // team name
                 ConfText.text = team["conference"]; // conference
@@ -68,7 +73,8 @@ public class fillStates : MonoBehaviour
                 HtTextFT.text = "ft"; // players word ft
                 HtTextIN.text = playerObject["height_inches"]; // players inches
                 HtTextQuote.text = "'"; // players Quotes
-                WtText.text = playerObject["weight_pounds"] + " lb"; // players weight
+                WtTextNum.text = playerObject["weight_pounds"]; // player weight
+                WtText.text = "lb"; // players word lb               
             }
             count++;
         }
@@ -77,6 +83,10 @@ public class fillStates : MonoBehaviour
 
     public void CheckCorrect()
     {
+        if (NameTextF.text == Game.AllStarName)
+        {
+            NameTextF.gameObject.GetComponentInParent<Image>().color = Color.green;
+        }
         if (TeamText.text == Game.AllStarTeam) // team text will go green if correct
         {
             TeamText.gameObject.GetComponentInParent<Image>().color = Color.green;
@@ -112,8 +122,11 @@ public class fillStates : MonoBehaviour
             if (int.Parse(HtTextIN.text) == Game.AllStarHtI)
             {
                 HtTextFTNUM.gameObject.GetComponentInParent<Image>().color = Color.green;
-                print("matches");
             }
+        }
+        if (int.Parse(WtTextNum.text) == Game.AllStarWt) // the weight will go green if correct
+        {
+            WtTextNum.gameObject.GetComponentInParent<Image>().color = Color.green;
         }
     }
 

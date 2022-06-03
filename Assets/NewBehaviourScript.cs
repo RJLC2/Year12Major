@@ -18,6 +18,7 @@ public class NewBehaviourScript : MonoBehaviour
     public GameObject clickedPlayer;
     public GameObject Rows;
 
+    public String AllStarName;
     public string AllStarTeam;
     public string AllStarConf;
     public string AllStarDiv;
@@ -142,13 +143,14 @@ public class NewBehaviourScript : MonoBehaviour
             if (count < 1) // once user has selected a player the rows will show up with the below information
             {
                 JSONNode team = playerObject["team"]; // all information under team
+                AllStarName = data["first_name" + "last_name"];
                 AllStarTeam = team["full_name"]; // team name
                 AllStarConf = team["conference"]; // conference
                 AllStarDiv = team["division"]; // teams divions
                 AllStarPos = playerObject["position"]; // players position
                 AllStarHtF = int.Parse(playerObject["height_feet"]); // players height feet
                 AllStarHtI = int.Parse(playerObject["height_inches"]); // players height inches
-                //AllStarWt = playerObject["weight_pounds"] + " lb"; // players weight
+                AllStarWt = int.Parse(playerObject["weight_pounds"]); // players weight
             }
             count++;
         }
